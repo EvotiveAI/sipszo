@@ -5,8 +5,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
 export const metadata = {
-  title: 'Rovatok | TAKTIKA',
-  description: 'Böngéssz témakör szerint a TAKTIKA cikkei között.'
+  title: 'Rovatok | Körkapcsolás',
+  description: 'Böngéssz témakör szerint a Körkapcsolás cikkei között.'
 }
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {

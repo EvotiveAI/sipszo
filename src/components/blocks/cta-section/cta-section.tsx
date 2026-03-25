@@ -31,7 +31,7 @@ const CTA = () => {
 
                   <div className='space-y-4'>
                     <p className='text-muted-foreground text-base leading-relaxed'>
-                      A TAKTIKA olyan, mint egy intelligens magyar sportmagazin: mélyelemzések, hosszú formátumú
+                      A Körkapcsolás olyan, mint egy intelligens magyar sportmagazin: mélyelemzések, hosszú formátumú
                       portrék, taktikai értékelések és felelős fogadási útmutatók — nem szenzáció, hanem substancia.
                     </p>
                     <p className='text-muted-foreground text-base leading-relaxed'>

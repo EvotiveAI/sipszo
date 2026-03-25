@@ -6,8 +6,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
 export const metadata = {
-  title: 'Legfrissebb | TAKTIKA',
-  description: 'A TAKTIKA legújabb cikkei, időrend szerint.'
+  title: 'Legfrissebb | Körkapcsolás',
+  description: 'A Körkapcsolás legújabb cikkei, időrend szerint.'
 }
 
 const LegfrissebbPage = () => {

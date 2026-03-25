@@ -7,8 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Impresszum | TAKTIKA',
-  description: 'A TAKTIKA kiadói adatai, szerkesztőségi elvek és jogi információk.'
+  title: 'Impresszum | Körkapcsolás',
+  description: 'A Körkapcsolás kiadói adatai, szerkesztőségi elvek és jogi információk.'
 }
 
 const ImpresszumPage = () => {
@@ -34,12 +34,12 @@ const ImpresszumPage = () => {
           <Card className='shadow-none'>
             <CardContent className='grid gap-3 p-6 text-sm sm:grid-cols-2'>
               {[
-                ['Lap neve', 'TAKTIKA — Prémium Magyar Sportelemzés'],
+                ['Lap neve', 'Körkapcsolás — Prémium Magyar Sportelemzés'],
                 ['Kiadó', 'ImHere2bet Média Kft.'],
                 ['Székhely', 'Budapest, Magyarország'],
                 ['Alapítva', '2025'],
                 ['Felelős szerkesztő', 'Szabó Dárió'],
-                ['Kapcsolat', 'szerkesztoseg@taktika.hu']
+                ['Kapcsolat', 'szerkesztoseg@korkapcsolas.hu']
               ].map(([label, value]) => (
                 <div key={label} className='space-y-0.5'>
                   <p className='text-muted-foreground text-xs uppercase tracking-wide'>{label}</p>
@@ -87,7 +87,7 @@ const ImpresszumPage = () => {
           <Card className='shadow-none'>
             <CardContent className='space-y-4 p-6 text-sm leading-relaxed'>
               <p className='text-muted-foreground'>
-                A TAKTIKA független magyar sportelemző magazin. Nem portál, nem hírfolyam, nem reklámprojekt.
+                A Körkapcsolás független magyar sportelemző magazin. Nem portál, nem hírfolyam, nem reklámprojekt.
                 Célunk az elmélyült, analitikai sportírás — a szenzációhajhászás és a gyorshírek helyett.
               </p>
               <p className='text-muted-foreground'>
@@ -116,7 +116,7 @@ const ImpresszumPage = () => {
                 <Badge className='bg-amber-500/20 text-amber-700 border-0 dark:text-amber-400'>Játssz felelősséggel</Badge>
               </div>
               <p className='text-muted-foreground'>
-                <strong className='text-foreground'>A TAKTIKA nem tippszolgálat.</strong> Nem ígérünk nyerő
+                <strong className='text-foreground'>A Körkapcsolás nem tippszolgálat.</strong> Nem ígérünk nyerő
                 fogadásokat, nem garantálunk profitot, és nem biztatunk senkit arra, hogy fogadjon. Cikkeink
                 oktatási és elemzési célt szolgálnak.
               </p>
@@ -139,7 +139,7 @@ const ImpresszumPage = () => {
         <section className='space-y-3'>
           <Separator className='opacity-40' />
           <p className='text-muted-foreground text-xs leading-relaxed'>
-            © {new Date().getFullYear()} TAKTIKA — Prémium Magyar Sportelemzés. Minden jog fenntartva.
+            © {new Date().getFullYear()} Körkapcsolás — Prémium Magyar Sportelemzés. Minden jog fenntartva.
             Az oldalon megjelent tartalmak szerzői jogi védelem alatt állnak. A cikkek vagy azok részeinek
             engedély nélküli másolása, terjesztése tilos. Az oldalon szereplő külső linkekért felelősséget
             nem vállalunk.

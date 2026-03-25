@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
 import CTA from '@/components/blocks/cta-section/cta-section'
 import Blog from '@/components/blocks/blog-related-post/blog-related-post'
+import NewsletterSignup from '@/components/blocks/newsletter-signup/newsletter-signup'
+import SupportButton from '@/components/blocks/support-button/support-button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 
@@ -20,20 +23,46 @@ import { DynamicToc } from '@/components/table-of-contents/dynamic-toc'
 
 import { blogPosts } from '@/assets/data/blog-posts'
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: 'Ink - Blog Landing Page',
-      description:
-        'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: 'en-US'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://korkapcsolas.hu'
+
+// Generate per-article metadata for SEO
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = blogPosts.find(p => p.slug === slug)
+  if (!post) return {}
+
+  return {
+    title: `${post.title} | Körkapcsolás`,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `${APP_URL}/blog-detail/${post.slug}`,
+      siteName: 'Körkapcsolás — Prémium Magyar Sportelemzés',
+      images: [
+        {
+          url: `${APP_URL}${post.imageUrl}`,
+          width: 1200,
+          height: 630,
+          alt: post.imageAlt
+        }
+      ],
+      locale: 'hu_HU',
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      section: post.category
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [`${APP_URL}${post.imageUrl}`]
+    },
+    alternates: {
+      canonical: `${APP_URL}/blog-detail/${post.slug}`
     }
-  ]
+  }
 }
 
 // Generate static params for all blog posts
@@ -45,7 +74,7 @@ export async function generateStaticParams() {
 
 // Navigation component for previous/next posts
 const PostNavigation = ({ currentPost }: { currentPost: (typeof blogPosts)[0] }) => {
-  const sortedPosts = blogPosts.sort((a, b) => a.id - b.id) // Changed from b.id - a.id
+  const sortedPosts = blogPosts.sort((a, b) => a.id - b.id)
   const currentIndex = sortedPosts.findIndex(post => post.id === currentPost.id)
 
   const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
@@ -108,6 +137,59 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
   // Combine: same category posts first, then other posts, limit to 3
   const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 3)
+
+  // Per-article Article schema (replaces the generic template)
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${APP_URL}#website`,
+        name: 'Körkapcsolás — Prémium Magyar Sportelemzés',
+        description: 'Mélyelemzések, taktikai értékelések és okos fogadási útmutatók sportelemzésekre specializált szerkesztőségtől.',
+        url: APP_URL,
+        inLanguage: 'hu-HU',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Körkapcsolás',
+          url: APP_URL,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${APP_URL}/images/logo.png`
+          }
+        }
+      },
+      {
+        '@type': 'Article',
+        '@id': `${APP_URL}/blog-detail/${post.slug}#article`,
+        headline: post.title,
+        description: post.description,
+        image: {
+          '@type': 'ImageObject',
+          url: `${APP_URL}${post.imageUrl}`,
+          caption: post.imageAlt
+        },
+        datePublished: post.date,
+        dateModified: post.date,
+        author: {
+          '@type': 'Person',
+          name: post.author
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Körkapcsolás',
+          url: APP_URL
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${APP_URL}/blog-detail/${post.slug}`
+        },
+        articleSection: post.category,
+        timeRequired: `PT${post.readTime}M`,
+        inLanguage: 'hu-HU'
+      }
+    ]
+  }
 
   return (
     <div>
@@ -180,6 +262,11 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                 <Post />
               </article>
 
+              {/* Support + Newsletter — after article content */}
+              <SupportButton variant='card' />
+
+              <NewsletterSignup variant='inline' />
+
               <PostNavigation currentPost={post} />
             </div>
           </div>
@@ -190,13 +277,14 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
       <CTA />
 
-      {/* Add JSON-LD to your page */}
+      {/* Per-article Article schema JSON-LD */}
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+          __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c')
         }}
       />
     </div>
   )
 }
+

@@ -4,18 +4,38 @@ import HeroSection from '@/components/blocks/hero-section/hero-section'
 import Blog from '@/components/blocks/blog-component/blog-component'
 import CTA from '@/components/blocks/cta-section/cta-section'
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://korkapcsolas.hu'
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@context': 'https://schema.org',
       '@type': 'WebSite',
-      '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: 'Ink - Blog Landing Page',
+      '@id': `${APP_URL}#website`,
+      name: 'Körkapcsolás — Prémium Magyar Sportelemzés',
       description:
-        'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: 'en-US'
+        'Mélyelemzések, taktikai értékelések, legendás meccsek és okos fogadási útmutatók — felelős, gondolkodó sportrajongóknak.',
+      url: APP_URL,
+      inLanguage: 'hu-HU',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${APP_URL}/legfrissebb?q={search_term_string}`
+        },
+        'query-input': 'required name=search_term_string'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Körkapcsolás',
+        url: APP_URL,
+        sameAs: [
+          'https://facebook.com/korkapcsolas',
+          'https://instagram.com/korkapcsolas',
+          'https://twitter.com/korkapcsolas',
+          'https://youtube.com/@korkapcsolas'
+        ]
+      }
     }
   ]
 }

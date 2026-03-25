@@ -7,8 +7,8 @@ import { Separator } from '@/components/ui/separator'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export const metadata = {
-  title: 'Szerzők | TAKTIKA',
-  description: 'Ismerd meg a TAKTIKA szerkesztőit és elemzőit.'
+  title: 'Szerzők | Körkapcsolás',
+  description: 'Ismerd meg a Körkapcsolás szerkesztőit és elemzőit.'
 }
 
 const SzerzokPage = () => {
@@ -21,7 +21,7 @@ const SzerzokPage = () => {
         </p>
         <h1 className='text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl'>Szerzők</h1>
         <p className='text-muted-foreground max-w-2xl text-lg'>
-          A TAKTIKA mögött álló emberek — elemzők, sporttörténészek, taktikai szakértők. Minden cikk egy
+          A Körkapcsolás mögött álló emberek — elemzők, sporttörténészek, taktikai szakértők. Minden cikk egy
           valódi szakember munkája.
         </p>
         <Separator className='mt-6 max-w-24 opacity-40' />

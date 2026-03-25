@@ -173,10 +173,10 @@ const KvizPage = () => {
                 className='gap-2'
                 onClick={() => {
                   if (navigator.share) {
-                    navigator.share({
-                      title: 'TAKTIKA Kvíz',
-                      text: `${score}/${QUESTIONS.length} pontot értem el a TAKTIKA futball kvízén! Próbáld te is!`
-                    })
+                      navigator.share({
+                        title: 'Körkapcsolás Kvíz',
+                        text: `${score}/${QUESTIONS.length} pontot értem el a Körkapcsolás futball kvízén! Próbáld te is!`
+                      })
                   }
                 }}
               >

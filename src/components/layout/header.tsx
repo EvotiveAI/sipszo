@@ -92,10 +92,10 @@ const Header = ({ navigationData, className }: HeaderProps) => {
   return (
     <header
       className={cn(
-        'bg-background sticky top-0 z-50 h-16 w-full transition-all duration-300',
-        {
-          'shadow-sm': isScrolled
-        },
+        'bg-background sticky top-0 z-50 h-16 w-full border-b transition-all duration-300',
+        isScrolled
+          ? 'border-[var(--brand-amber)]/40 shadow-sm'
+          : 'border-[var(--brand-amber)]/20',
         className
       )}
     >
@@ -103,7 +103,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         {/* Logo */}
         <Link href='/#home' className='flex items-center gap-3'>
           <InkLogo />
-          <span className='text-foreground text-[18px] font-bold tracking-[0.18em] uppercase'>TAKTIKA</span>
+          <span className='text-foreground text-[15px] font-bold tracking-[0.10em] uppercase'>KÖRKAPCSOLÁS</span>
         </Link>
 
         {/* Navigation */}

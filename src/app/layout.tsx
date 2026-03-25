@@ -28,13 +28,44 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s — TAKTIKA',
-    default: 'TAKTIKA — Magyar Sportelemzés & Sporttörténelem'
+    template: '%s | Körkapcsolás',
+    default: 'Körkapcsolás — Prémium Magyar Sportelemzés & Okos Fogadás'
   },
   description:
-    'A TAKTIKA prémium magyar sportelemzési platform. Legendás meccsek, ikonikus sportolók portréi, taktikai elemzések és felelős fogadási útmutatók.',
-  robots: 'index,follow',
-  keywords: ['magyar sport', 'sportelemzés', 'sporttörténelem', 'legendás meccsek', 'Puskás', 'futball elemzés', 'okos fogadás'],
+    'Mélyelemzések, taktikai értékelések, legendás meccsek és okos fogadási útmutatók — felelős, gondolkodó sportrajongóknak. Nem tippeket adunk: gondolkodást tanítunk.',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1
+    }
+  },
+  keywords: [
+    'körkapcsolás',
+    'magyar sportelemzés',
+    'sporttörténelem',
+    'legendás meccsek',
+    'Puskás Ferenc',
+    'futball elemzés',
+    'taktikai elemzés',
+    'okos fogadás',
+    'value betting',
+    'értékfogadás',
+    'NB I elemzés',
+    'Champions League elemzés',
+    'Guardiola taktika',
+    'Klopp pressing',
+    'sporttipp',
+    'fogadási útmutató',
+    'Körkapcsolás'
+  ],
+  authors: [{ name: 'Körkapcsolás Szerkesztőség', url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://korkapcsolas.hu' }],
+  creator: 'Körkapcsolás',
+  publisher: 'Körkapcsolás',
   icons: {
     icon: [
       {
@@ -76,34 +107,41 @@ export const metadata: Metadata = {
     ]
   },
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
-    openGraph: {
+  openGraph: {
     title: {
-      template: '%s — TAKTIKA',
-      default: 'TAKTIKA — Magyar Sportelemzés & Sporttörténelem'
+      template: '%s | Körkapcsolás',
+      default: 'Körkapcsolás — Prémium Magyar Sportelemzés & Okos Fogadás'
     },
     description:
-      'A TAKTIKA prémium magyar sportelemzési platform. Legendás meccsek, ikonikus sportolók portréi, taktikai elemzések.',
+      'Mélyelemzések, taktikai értékelések, legendás meccsek és okos fogadási útmutatók — felelős, gondolkodó sportrajongóknak.',
     type: 'website',
-    siteName: 'TAKTIKA',
+    siteName: 'Körkapcsolás — Prémium Magyar Sportelemzés',
     url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
+    locale: 'hu_HU',
     images: [
       {
         url: '/images/og-image.webp',
-        type: 'image/png',
+        type: 'image/webp',
         width: 1200,
         height: 630,
-        alt: 'TAKTIKA — Magyar Sportelemzés'
+        alt: 'Körkapcsolás — Prémium Magyar Sportelemzés & Okos Fogadás'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@korkapcsolas',
+    creator: '@korkapcsolas',
     title: {
-      template: '%s — TAKTIKA',
-      default: 'TAKTIKA — Magyar Sportelemzés & Sporttörténelem'
+      template: '%s | Körkapcsolás',
+      default: 'Körkapcsolás — Prémium Magyar Sportelemzés & Okos Fogadás'
     },
     description:
-      'A TAKTIKA prémium magyar sportelemzési platform. Legendás meccsek, ikonikus sportolók portréi, taktikai elemzések.'
+      'Mélyelemzések, taktikai értékelések, legendás meccsek és okos fogadási útmutatók — felelős, gondolkodó sportrajongóknak.',
+    images: ['/images/og-image.webp']
+  },
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_APP_URL ?? 'https://korkapcsolas.hu'
   }
 }
 

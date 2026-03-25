@@ -24,7 +24,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
 
         {/* Editorial masthead */}
         <div className='flex flex-col items-center gap-2 pb-8 pt-2 text-center'>
-          <p className='text-muted-foreground text-xs font-medium uppercase tracking-[0.22em]'>
+          <p className='text-xs font-semibold uppercase tracking-[0.22em]' style={{ color: 'var(--brand-amber)' }}>
             Prémium Magyar Sportelemzés
           </p>
           <h1 className='text-foreground text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
@@ -33,7 +33,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
           <p className='text-muted-foreground mt-1 max-w-xl text-base leading-relaxed'>
             Legendás meccsek, ikonikus személyiségek, taktikai mélységek — intelligens olvasóknak.
           </p>
-          <Separator className='mt-6 max-w-24 opacity-40' />
+          <div className='mt-6 h-px w-24 opacity-70' style={{ backgroundColor: 'var(--brand-amber)' }} />
         </div>
 
         {/* Primary featured article — full-width editorial hero */}

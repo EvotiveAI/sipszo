@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 
 export const metadata = {
-  title: 'Címkék | TAKTIKA',
-  description: 'Böngéssz témák, kulcsszavak és szerzők szerint a TAKTIKA tartalmai között.'
+  title: 'Címkék | Körkapcsolás',
+  description: 'Böngéssz témák, kulcsszavak és szerzők szerint a Körkapcsolás tartalmai között.'
 }
 
 const CimkekPage = () => {
@@ -31,7 +31,7 @@ const CimkekPage = () => {
         <p className='text-muted-foreground text-xs font-medium uppercase tracking-[0.22em]'>Feltárás</p>
         <h1 className='text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl'>Címkék</h1>
         <p className='text-muted-foreground max-w-2xl text-lg'>
-          Keress rá témakörökre, szerzőkre — fedezd fel a TAKTIKA teljes tartalmát.
+          Keress rá témakörökre, szerzőkre — fedezd fel a Körkapcsolás teljes tartalmát.
         </p>
         <Separator className='mt-6 max-w-24 opacity-40' />
       </div>

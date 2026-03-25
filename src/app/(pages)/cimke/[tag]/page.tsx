@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
   const { tag } = await params
   const decoded = decodeURIComponent(tag)
   return {
-    title: `${decoded} | Címkék | TAKTIKA`,
+    title: `${decoded} | Címkék | Körkapcsolás`,
     description: `Cikkek a(z) "${decoded}" témakörből.`
   }
 }

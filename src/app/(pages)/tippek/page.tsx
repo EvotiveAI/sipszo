@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { TrophyIcon, AlertTriangleIcon, TrendingUpIcon } from 'lucide-react'
+import { TrophyIcon, AlertTriangleIcon, TrendingUpIcon, SparklesIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Progress } from '@/components/ui/progress'
+import NewsletterSignup from '@/components/blocks/newsletter-signup/newsletter-signup'
 
 type VoteOption = 'home' | 'draw' | 'away'
 
@@ -23,6 +24,7 @@ type Match = {
   analystPick: VoteOption
   analystNote: string
   initialVotes: { home: number; draw: number; away: number }
+  isPremium?: boolean
 }
 
 const MATCHES: Match[] = [
@@ -52,7 +54,8 @@ const MATCHES: Match[] = [
     awayOdds: '3.40',
     analystPick: 'draw',
     analystNote: 'A Madrid-derbi historikusan kiegyenlített — Atlético remek védekezése könnyen pontot ér.',
-    initialVotes: { home: 445, draw: 198, away: 203 }
+    initialVotes: { home: 445, draw: 198, away: 203 },
+    isPremium: true
   },
   {
     id: 3,
@@ -80,7 +83,8 @@ const MATCHES: Match[] = [
     awayOdds: '3.10',
     analystPick: 'draw',
     analystNote: 'A Derby della Madonnina mindig meglepetés — mindkét csapat egyforma esélyekkel lép pályára.',
-    initialVotes: { home: 287, draw: 241, away: 294 }
+    initialVotes: { home: 287, draw: 241, away: 294 },
+    isPremium: true
   },
   {
     id: 5,
@@ -131,6 +135,12 @@ const MatchCard = ({ match }: { match: Match }) => {
           <div className='flex items-center gap-2'>
             <span className='text-base'>{match.leagueBadge}</span>
             <Badge className='bg-primary/10 text-primary border-0 text-xs'>{match.league}</Badge>
+            {match.isPremium && (
+              <Badge className='gap-1 border-0 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs'>
+                <SparklesIcon className='size-3' />
+                Prémium
+              </Badge>
+            )}
           </div>
           <span className='text-muted-foreground text-xs'>{match.date}</span>
         </div>
@@ -211,15 +221,16 @@ const MatchCard = ({ match }: { match: Match }) => {
 
 const TippekPage = () => {
   return (
-    <div className='mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8'>
+    <div className='analytics-theme dark min-h-full w-full bg-background text-foreground'>
+      <div className='mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8'>
       {/* Header */}
       <div className='mb-10 space-y-3'>
-        <p className='text-muted-foreground text-xs font-medium uppercase tracking-[0.22em]'>433 stílusban</p>
+        <p className='text-xs font-semibold uppercase tracking-[0.22em]' style={{ color: 'var(--brand-amber)' }}>Körkapcsolás Analytics</p>
         <h1 className='text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl'>Tippek & Predikciók</h1>
         <p className='text-muted-foreground max-w-2xl text-lg'>
           Elemzőink előrejelzései a hét meccseihez — és te is szavazhatsz. Valószínűség, logika, felelős gondolkodás.
         </p>
-        <Separator className='mt-6 max-w-24 opacity-40' />
+        <div className='mt-6 h-px w-24 opacity-70' style={{ backgroundColor: 'var(--brand-amber)' }} />
       </div>
 
       {/* Disclaimer */}
@@ -236,12 +247,34 @@ const TippekPage = () => {
       {/* Matches */}
       <div className='space-y-5'>
         <div className='flex items-center gap-2'>
-          <TrophyIcon className='text-primary size-5' />
+          <TrophyIcon className='size-5' style={{ color: 'var(--brand-amber)' }} />
           <h2 className='text-lg font-bold'>A hét mérkőzései</h2>
         </div>
         {MATCHES.map(match => (
           <MatchCard key={match.id} match={match} />
         ))}
+      </div>
+
+      {/* Premium perception banner */}
+      <div className='mt-8 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-4 text-sm dark:border-amber-900/30 dark:bg-amber-900/10'>
+        <SparklesIcon className='mt-0.5 size-4 shrink-0 text-amber-500' />
+        <div className='space-y-1'>
+          <p className='text-foreground font-semibold'>Hamarosan: Prémium Tippek</p>
+          <p className='text-muted-foreground leading-relaxed'>
+            A <span className='font-medium'>Prémium</span> jelölésű elemzések hamarosan előfizetéses tartalommá
+            válnak — részletesebb statisztikákkal, odds-összehasonlítóval és szerzői betting naplóval. Most még
+            mindenki ingyen olvashatja.
+          </p>
+        </div>
+      </div>
+
+      {/* Newsletter CTA */}
+      <div className='mt-10'>
+        <p className='text-muted-foreground mb-4 text-sm font-medium uppercase tracking-wide'>
+          Ne maradj le a hétvégi tippekről
+        </p>
+        <NewsletterSignup variant='inline' />
+      </div>
       </div>
     </div>
   )

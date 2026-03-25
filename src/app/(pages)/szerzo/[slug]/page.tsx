@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
   const author = authors.find(a => a.slug === slug)
   if (!author) return {}
   return {
-    title: `${author.name} | TAKTIKA`,
+    title: `${author.name} | Körkapcsolás`,
     description: author.bio
   }
 }
