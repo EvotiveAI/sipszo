@@ -1,5 +1,5 @@
 'use client'
-import { ArrowUpRightIcon, CalendarDaysIcon, ClockIcon } from 'lucide-react'
+import { ArrowUpRightIcon, CalendarDaysIcon, ClockIcon, ChartBarIcon, BookOpenIcon } from 'lucide-react'
 
 import { useRouter } from 'next/navigation'
 
@@ -28,12 +28,26 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
             Prémium Magyar Sportelemzés
           </p>
           <h1 className='text-foreground text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
-            Sport mint kultúra.
+            Értsd a sportot mélyebben.
           </h1>
-          <p className='text-muted-foreground mt-1 max-w-xl text-base leading-relaxed'>
-            Legendás meccsek, ikonikus személyiségek, taktikai mélységek — intelligens olvasóknak.
+          <p className='text-muted-foreground mt-1 max-w-2xl text-base leading-relaxed'>
+            Mélyelemzések, taktikai értékelések és okos fogadási stratégiák — azoknak, akik a sportot komolyan veszik, és gondolkodva fogadnak.
           </p>
           <div className='mt-6 h-px w-24 opacity-70' style={{ backgroundColor: 'var(--brand-amber)' }} />
+          <div className='mt-5 flex flex-wrap items-center justify-center gap-3'>
+            <Button asChild size='sm' className='gap-2'>
+              <Link href='/legfrissebb'>
+                <BookOpenIcon className='size-4' />
+                Legfrissebb elemzések
+              </Link>
+            </Button>
+            <Button asChild size='sm' variant='outline' className='gap-2'>
+              <Link href='/tippek'>
+                <ChartBarIcon className='size-4' />
+                Okos fogadás útmutató
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Primary featured article — full-width editorial hero */}

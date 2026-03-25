@@ -11,8 +11,8 @@ const CTA = () => {
               {/* Left Column - Image */}
               <div className='relative h-64 sm:h-80 lg:h-auto'>
                 <img
-                  src='/images/cta.webp'
-                  alt='Szerkesztőségi irodánk'
+                  src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80'
+                  alt='Sportelemzés és szerkesztőségi munka — Körkapcsolás'
                   className='h-full w-full rounded-lg object-cover'
                 />
               </div>
@@ -25,18 +25,18 @@ const CTA = () => {
                       Szerkesztőségi elvek
                     </p>
                     <h2 className='text-foreground text-xl leading-snug font-bold tracking-tight lg:text-2xl'>
-                      Ez az oldal nem portál. Nem hírfolyam. Nem reklámprojekt.
+                      Nem tipp. Nem szenzáció. Taktika és gondolkodás.
                     </h2>
                   </div>
 
                   <div className='space-y-4'>
                     <p className='text-muted-foreground text-base leading-relaxed'>
-                      A Körkapcsolás olyan, mint egy intelligens magyar sportmagazin: mélyelemzések, hosszú formátumú
-                      portrék, taktikai értékelések és felelős fogadási útmutatók — nem szenzáció, hanem substancia.
+                      A Körkapcsolás prémium magyar sportmagazin: mélyelemzések, hosszú formátumú portrék, taktikai
+                      értékelések és felelős fogadási útmutatók — nem szenzáció, hanem szubsztancia.
                     </p>
                     <p className='text-muted-foreground text-base leading-relaxed'>
-                      Minden szöveg szerkesztői ellenőrzésen megy át. Nem ígérünk profitot, nem adunk „biztos
-                      tippet" — de gondolkodásra késztetünk, és megadjuk az eszközöket a saját ítéletalkotáshoz.
+                      Minden tartalom szerkesztői ellenőrzésen megy át. Nem ígérünk profitot, nem adunk „biztos
+                      tippet" — de gondolkodásra késztetünk, és megadjuk az eszközöket a saját döntéshozatalhoz.
                     </p>
                   </div>
 

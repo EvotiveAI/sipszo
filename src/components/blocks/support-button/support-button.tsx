@@ -58,14 +58,14 @@ const SupportButton = ({ variant = 'card', className = '' }: SupportButtonProps)
             </p>
           </div>
           <a href={SUPPORT_URL} target='_blank' rel='noopener noreferrer' className='shrink-0'>
-            <Button
-              variant='outline'
-              className='w-full gap-2 border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 dark:border-rose-900/40 dark:text-rose-400 dark:hover:bg-rose-900/20 sm:w-auto'
-            >
-              <HeartIcon className='size-4' />
-              Támogasd a TAKTIKÁT
-              <ExternalLinkIcon className='size-3.5' />
-            </Button>
+              <Button
+                      variant='outline'
+                      className='w-full gap-2 border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 dark:border-rose-900/40 dark:text-rose-400 dark:hover:bg-rose-900/20 sm:w-auto'
+                    >
+                      <HeartIcon className='size-4' />
+                      Támogasd a Körkapcsolást
+                      <ExternalLinkIcon className='size-3.5' />
+                    </Button>
           </a>
         </div>
       </CardContent>
