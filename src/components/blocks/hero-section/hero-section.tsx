@@ -19,7 +19,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
   if (!heroPrimary) return null
 
   return (
-    <section id='home' className='bg-muted -mt-16 pt-32 pb-12 sm:pb-16 lg:pb-20'>
+    <section id='home' className='bg-muted pt-12 pb-12 sm:pb-16 lg:pb-20'>
       <div className='mx-auto flex h-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8'>
 
         {/* Editorial masthead */}

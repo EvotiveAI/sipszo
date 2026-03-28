@@ -36,11 +36,11 @@ const PagesLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       {/* Header Section */}
       <Header navigationData={navigationData} />
 
-      {/* Newsletter Banner */}
-      <NewsletterSignup variant='banner' />
-
       {/* Main Content */}
       <main className='flex flex-col'>{children}</main>
+
+      {/* Newsletter Banner */}
+      <NewsletterSignup variant='banner' />
 
       {/* Footer Section */}
       <Footer />
