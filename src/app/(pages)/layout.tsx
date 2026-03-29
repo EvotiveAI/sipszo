@@ -17,8 +17,8 @@ const navigationData: NavigationSection[] = [
     href: '/rovat'
   },
   {
-    title: 'Szerzők',
-    href: '/szerzo'
+    title: 'Kezdőknek',
+    href: '/kezdoknek'
   },
   {
     title: 'Tippek',

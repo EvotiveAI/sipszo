@@ -3,6 +3,7 @@ import type { MetadataRoute } from 'next'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [
     '',
+    '/kezdoknek',
     '/blog-detail/scaling-design-component-system',
     '/blog-detail/user-behavior-design',
     '/blog-detail/product-launch-checklist',
