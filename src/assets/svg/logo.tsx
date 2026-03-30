@@ -3,7 +3,7 @@ import Image from 'next/image'
 const LogoSvg = () => {
   return (
     <Image
-      src='/logo/logo-small.webp'
+      src='/logo/ujkorkapcsolaslogo.png'
       alt='Körkapcsolás logo'
       width={44}
       height={44}

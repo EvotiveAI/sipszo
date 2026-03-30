@@ -10,6 +10,14 @@ export const metadata = {
   description: 'A Körkapcsolás legújabb cikkei, időrend szerint.'
 }
 
+function isWithin7Days(publishedAt: string): boolean {
+  const published = new Date(publishedAt)
+  const now = new Date()
+  const diffMs = now.getTime() - published.getTime()
+  const diffDays = diffMs / (1000 * 60 * 60 * 24)
+  return diffDays <= 7
+}
+
 const LegfrissebbPage = () => {
   const sorted = [...blogPosts].sort((a, b) => b.id - a.id)
 
@@ -57,6 +65,11 @@ const LegfrissebbPage = () => {
                       {post.featured && (
                         <Badge className='bg-amber-500/10 text-amber-600 border-0 text-xs'>
                           Kiemelt
+                        </Badge>
+                      )}
+                      {post.publishedAt && isWithin7Days(post.publishedAt) && (
+                        <Badge className='bg-amber-500 text-white border-0 text-xs font-bold'>
+                          ÚJ
                         </Badge>
                       )}
                     </div>

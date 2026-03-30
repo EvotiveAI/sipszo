@@ -155,7 +155,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           url: APP_URL,
           logo: {
             '@type': 'ImageObject',
-            url: `${APP_URL}/images/logo.png`
+            url: `${APP_URL}/logo/ujkorkapcsolaslogo.png`
           }
         }
       },

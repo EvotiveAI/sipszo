@@ -31,12 +31,107 @@ export type BlogPost = {
   imageUrl: string
   imageAlt: string
   date: string
+  publishedAt: string
   category: string
   author: string
   avatarUrl: string
   readTime: number
   featured: boolean
 }
+
+const isWithin7Days = (publishedAt: string): boolean => {
+  const diffMs = Date.now() - new Date(publishedAt).getTime()
+  return diffMs / (1000 * 60 * 60 * 24) <= 7
+}
+
+const PostCard = ({
+  post,
+  onCategoryClick
+}: {
+  post: BlogPost
+  onCategoryClick: (category: string) => void
+}) => {
+  const router = useRouter()
+  const isNew = isWithin7Days(post.publishedAt)
+
+  return (
+    <Card
+      className='group h-full cursor-pointer overflow-hidden shadow-none transition-all duration-300'
+      onClick={() => router.push(`/blog-detail/${post.slug}`)}
+    >
+      <CardContent className='space-y-3.5'>
+        <div className='relative mb-6 overflow-hidden rounded-lg sm:mb-12'>
+          {isNew && (
+            <div className='absolute left-3 top-3 z-10'>
+              <Badge className='rounded-full border-0 bg-amber-500 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm'>
+                ÚJ
+              </Badge>
+            </div>
+          )}
+          <img
+            src={post.imageUrl}
+            alt={post.imageAlt}
+            className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
+          />
+        </div>
+        <div className='flex items-center justify-between gap-1.5'>
+          <div className='text-muted-foreground flex items-center gap-1.5'>
+            <CalendarDaysIcon className='size-5' />
+            <span>{post.date}</span>
+          </div>
+          <Badge
+            className='bg-primary/10 text-primary rounded-full border-0 text-sm'
+            onClick={e => {
+              e.stopPropagation()
+              onCategoryClick(post.category)
+            }}
+          >
+            {post.category}
+          </Badge>
+        </div>
+        <h3 className='line-clamp-2 text-lg font-medium md:text-xl'>{post.title}</h3>
+        <p className='text-muted-foreground line-clamp-2'>{post.description}</p>
+        <div className='flex items-center justify-between'>
+          <span className='text-sm font-medium'>{post.author}</span>
+          <Button
+            size='icon'
+            className='group-hover:bg-primary! bg-background text-foreground hover:bg-primary! hover:text-primary-foreground group-hover:text-primary-foreground border group-hover:border-transparent hover:border-transparent'
+          >
+            <ArrowRightIcon className='size-4 -rotate-45' />
+            <span className='sr-only'>Tovább: {post.title}</span>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+const SectionDivider = ({ label, accent = false }: { label: string; accent?: boolean }) => (
+  <div className='flex items-center gap-4'>
+    <span
+      className={`whitespace-nowrap text-xs font-semibold uppercase tracking-[0.2em] ${
+        accent ? 'text-primary' : 'text-muted-foreground'
+      }`}
+    >
+      {label}
+    </span>
+    <div className='bg-border h-px flex-1' />
+  </div>
+)
+
+const PostsGrid = ({
+  posts,
+  onCategoryClick
+}: {
+  posts: BlogPost[]
+  onCategoryClick: (category: string) => void
+}) => (
+  <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+    {posts.map(post => (
+      <PostCard key={post.id} post={post} onCategoryClick={onCategoryClick} />
+    ))}
+  </div>
+)
 
 const BlogGrid = ({
   posts,
@@ -47,8 +142,6 @@ const BlogGrid = ({
   onCategoryClick: (category: string) => void
   searchQuery: string
 }) => {
-  const router = useRouter()
-
   const filtered = useMemo(() => {
     if (!searchQuery.trim()) return posts
     const q = searchQuery.toLowerCase()
@@ -71,52 +164,29 @@ const BlogGrid = ({
     )
   }
 
+  if (searchQuery.trim()) {
+    return <PostsGrid posts={filtered} onCategoryClick={onCategoryClick} />
+  }
+
+  const newPosts = filtered.filter(p => isWithin7Days(p.publishedAt))
+  const archivePosts = filtered.filter(p => !isWithin7Days(p.publishedAt))
+
+  if (newPosts.length === 0) {
+    return <PostsGrid posts={archivePosts} onCategoryClick={onCategoryClick} />
+  }
+
   return (
-    <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-      {filtered.map(post => (
-        <Card
-          key={post.id}
-          className='group h-full cursor-pointer overflow-hidden shadow-none transition-all duration-300'
-          onClick={() => router.push(`/blog-detail/${post.slug}`)}
-        >
-          <CardContent className='space-y-3.5'>
-            <div className='mb-6 overflow-hidden rounded-lg sm:mb-12'>
-              <img
-                src={post.imageUrl}
-                alt={post.imageAlt}
-                className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
-              />
-            </div>
-            <div className='flex items-center justify-between gap-1.5'>
-              <div className='text-muted-foreground flex items-center gap-1.5'>
-                <CalendarDaysIcon className='size-5' />
-                <span>{post.date}</span>
-              </div>
-              <Badge
-                className='bg-primary/10 text-primary rounded-full border-0 text-sm'
-                onClick={e => {
-                  e.stopPropagation()
-                  onCategoryClick(post.category)
-                }}
-              >
-                {post.category}
-              </Badge>
-            </div>
-            <h3 className='line-clamp-2 text-lg font-medium md:text-xl'>{post.title}</h3>
-            <p className='text-muted-foreground line-clamp-2'>{post.description}</p>
-            <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium'>{post.author}</span>
-              <Button
-                size='icon'
-                className='group-hover:bg-primary! bg-background text-foreground hover:bg-primary! hover:text-primary-foreground group-hover:text-primary-foreground border group-hover:border-transparent hover:border-transparent'
-              >
-                <ArrowRightIcon className='size-4 -rotate-45' />
-                <span className='sr-only'>Tovább: {post.title}</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+    <div className='space-y-12'>
+      <div className='space-y-6'>
+        <SectionDivider label='Legfrissebb cikkek' accent />
+        <PostsGrid posts={newPosts} onCategoryClick={onCategoryClick} />
+      </div>
+      {archivePosts.length > 0 && (
+        <div className='space-y-6'>
+          <SectionDivider label='Archívum' />
+          <PostsGrid posts={archivePosts} onCategoryClick={onCategoryClick} />
+        </div>
+      )}
     </div>
   )
 }
